@@ -1,10 +1,30 @@
-services:
-  redis:
-    image: redis:latest
-    ports:
-      - 3000:6379
-    volumes:
-      - redis:/data
+version: "3.9"
 
 volumes:
   redis:
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - client
+      - server
+    ports:
+      - "80:80"
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+  redis:
+    image: redis:latest
+    command: redis-server /usr/local/etc/redis/redis.conf --appendonly no --requirepass 12345678x@X
+    ports:
+      - 6379
+    volumes:
+      - redis:/data
+      - ./redis_conf:/usr/local/etc/redis
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
