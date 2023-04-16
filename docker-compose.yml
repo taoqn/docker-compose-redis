@@ -1,0 +1,10 @@
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - 3000:6379
+    volumes:
+      - redis:/data
+
+volumes:
+  redis:
