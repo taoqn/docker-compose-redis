@@ -10,8 +10,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     depends_on:
-      - client
-      - server
+      - redis
     ports:
       - "80:80"
 
