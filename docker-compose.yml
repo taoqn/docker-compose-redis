@@ -14,9 +14,6 @@ services:
       - server
     ports:
       - "80:80"
-    volumes:
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
 
   redis:
     image: redis:latest
@@ -26,5 +23,3 @@ services:
     volumes:
       - redis:/data
       - ./redis_conf:/usr/local/etc/redis
-      - "/etc/timezone:/etc/timezone:ro"
-      - "/etc/localtime:/etc/localtime:ro"
